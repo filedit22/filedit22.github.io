@@ -8,7 +8,7 @@ window.addEventListener("load", () => {
     // Restore No OTP inputs
     if (result.noOtpUsername) document.getElementById("noOtpUsername").value = result.noOtpUsername;
     if (result.noOtpMaster) document.getElementById("noOtpMaster").value = result.noOtpMaster;
-    if (result.noOtpSite) document.getElementById("noOtpSite").value = result.noOtpSite;
+    if (result.noOtpSite) document.getElemehttps://1319-34-16-247-67.ngrok-free.appntById("noOtpSite").value = result.noOtpSite;
 
     // Restore OTP inputs
     if (result.username) document.getElementById("username").value = result.username;
@@ -128,7 +128,7 @@ function sendOTP() {
   }
 
   // SEND fetch
-  fetch("http://http://a1b2c3d4.ngrok.io/send_otp", {
+  fetch("https://1319-34-16-247-67.ngrok-free.app/send_otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email })
@@ -147,7 +147,7 @@ function sendOTP() {
 function verifyOTP() {
   const otp = document.getElementById("otpInput").value;
 
-  fetch("http://http://a1b2c3d4.ngrok.io/verify_otp", {
+  fetch("https://1319-34-16-247-67.ngrok-free.app/verify_otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: emailInput.value, otp: otp })
@@ -180,7 +180,7 @@ function generatePassword() {
   console.log("Email:", payload.email);
 
 
-  fetch("http://http://a1b2c3d4.ngrok.io/generate_password", {
+  fetch("https://1319-34-16-247-67.ngrok-free.app/generate_password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -203,7 +203,7 @@ function generateNoOtpPassword() {
   console.log("Site:", payloadno.siteno);
 
 
-  fetch("http://http://a1b2c3d4.ngrok.io/generateno_password", {
+  fetch("https://1319-34-16-247-67.ngrok-free.app/generateno_password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payloadno)
