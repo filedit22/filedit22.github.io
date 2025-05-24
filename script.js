@@ -203,11 +203,11 @@ function generateNoOtpPassword() {
   console.log("Site:", payloadno.siteno);
 
 
-  fetch("https://a5b2-34-16-247-67.ngrok-free.app/generateno_password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payloadno)
-  })
+  fetch("https://789f-34-16-247-67.ngrok-free.app/generateno_password", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payloadno)
+            })
       .then(res => res.json())
       .then(datano => {
           document.getElementById("generatednoPassword").innerText = datano.password;
