@@ -128,7 +128,7 @@ function sendOTP() {
   }
 
   // SEND fetch
-  fetch("http://127.0.0.1:5000/send_otp", {
+  fetch("http://http://a1b2c3d4.ngrok.io/send_otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email })
@@ -147,7 +147,7 @@ function sendOTP() {
 function verifyOTP() {
   const otp = document.getElementById("otpInput").value;
 
-  fetch("http://127.0.0.1:5000/verify_otp", {
+  fetch("http://http://a1b2c3d4.ngrok.io/verify_otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: emailInput.value, otp: otp })
@@ -180,7 +180,7 @@ function generatePassword() {
   console.log("Email:", payload.email);
 
 
-  fetch("http://127.0.0.1:5000/generate_password", {
+  fetch("http://http://a1b2c3d4.ngrok.io/generate_password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -203,7 +203,7 @@ function generateNoOtpPassword() {
   console.log("Site:", payloadno.siteno);
 
 
-  fetch("http://127.0.0.1:5000/generateno_password", {
+  fetch("http://http://a1b2c3d4.ngrok.io/generateno_password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payloadno)
