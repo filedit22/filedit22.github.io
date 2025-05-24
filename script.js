@@ -203,7 +203,7 @@ function generateNoOtpPassword() {
   console.log("Site:", payloadno.siteno);
 
 
-  fetch("https://1319-34-16-247-67.ngrok-free.app/generateno_password", {
+  fetch("https://19dd-34-16-247-67.ngrok-free.app/generateno_password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payloadno)
