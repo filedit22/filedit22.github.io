@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Backup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 10px;
+        }
+
+        input {
+            margin: 5px;
+            padding: 6px;
+            width: 250px;
+        }
+
+        button {
+            padding: 6px 10px;
+            margin: 5px;
+        }
+	
+
+        #otpStatus, #noOtpResult {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #generatedPassword, #generatednoPassword {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #e63946;
+            cursor: pointer;
+            filter: blur(8px);
+            transition: filter 0.1s ease;
+            user-select: none;
+        }
+        
+        #generatedPassword:hover, #generatednoPassword:hover {
+            filter: blur(0);
+        }
+	
+
+    </style>
+</head>
+<body>
+
+    <!-- NO OTP MENU -->
+    <div id="noOtpMenu" >
+        <h3>No OTP</h3>
+        <button id="btnUseOtp">Use OTP</button>
+        <br>
+        <input type="text" id="noOtpUsername" placeholder="Username"><br>
+        <input type="password" id="noOtpMaster" placeholder="Master Password"><br>
+        <input type="text" id="noOtpSite" placeholder="Site Name"><br>
+        <button id="btnGenerateNoOtpPwd">Generate Password</button>
+        <div id="generatednoPassword"
+             title="Click to copy"
+             onmouseover="this.style.filter='none';"
+             onmouseout="this.style.filter='blur(8px)';">
+        </div>
+
+        <span id="copiedNotice" style="display:none; color:green;"> (Copied!)</span>
+    </div>
+
+    <!-- Menu OTP -->
+    <div id="otpMenu" style="display: none; margin-top: 20px;">
+        <h3>OTP</h3>
+        <button id="btnNoOtp">Don't Use OTP</button>
+        <br>
+        
+        <input type="text" id="emailInput" placeholder="Enter your Email">
+        <button id="btnSendOtp">Send OTP</button>
+        <span id="otpSendStatus" style="margin-left: 10px; color: green;"></span>
+        <br>
+
+        <div id="otpContain" style="display: none;">
+            <input type="text" id="otpInput" placeholder="Enter OTP">
+            <button id="btnVerifyOtp" style="margin-left: 5px;">Verify OTP</button>
+        </div>
+
+        <span id="otpStatus" style="margin-left: 10px;"></span>
+
+        <!-- Setelah OTP terverifikasi -->
+        <div id="passwordSection" style="display: none; margin-top: 15px;">
+            <input type="text" id="username" placeholder="Username"><br>
+            <input type="password" id="masterPassword" placeholder="Master Password"><br>
+            <input type="text" id="siteName" placeholder="Site Name"><br>
+            <button id="btnGeneratePwd">Generate Password</button>
+            <div id="generatedPassword"
+             title="Click to copy"
+             onmouseover="this.style.filter='none';"
+             onmouseout="this.style.filter='blur(8px)';">
+        </div>
+        <span id="copiedNotice" style="display:none; color:green;"> (Copied!)</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+
+</html>
