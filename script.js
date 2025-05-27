@@ -128,7 +128,7 @@ function sendOTP() {
   }
 
   // SEND fetch
-  fetch("https://1319-34-16-247-67.ngrok-free.app/send_otp", {
+  fetch("https://f3d7-180-244-166-224.ngrok-free.app/send_otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email })
@@ -147,7 +147,7 @@ function sendOTP() {
 function verifyOTP() {
   const otp = document.getElementById("otpInput").value;
 
-  fetch("https://1319-34-16-247-67.ngrok-free.app/verify_otp", {
+  fetch("https://f3d7-180-244-166-224.ngrok-free.app/verify_otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: emailInput.value, otp: otp })
@@ -180,7 +180,7 @@ function generatePassword() {
   console.log("Email:", payload.email);
 
 
-  fetch("https://1319-34-16-247-67.ngrok-free.app/generate_password", {
+  fetch("https://f3d7-180-244-166-224.ngrok-free.app/generate_password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -203,7 +203,7 @@ function generateNoOtpPassword() {
   console.log("Site:", payloadno.siteno);
 
 
-  fetch("https://789f-34-16-247-67.ngrok-free.app/generateno_password", {
+  fetch("https://f3d7-180-244-166-224.ngrok-free.app/generateno_password", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payloadno)
