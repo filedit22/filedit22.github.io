@@ -1,20 +1,8 @@
-// Restore saved values on load
+let otpMenuVisible = false
 window.addEventListener("load", () => {
-  chrome.storage.local.get([
-    "noOtpUsername", "noOtpMaster", "noOtpSite",
-    "username", "masterPassword", "siteName",
-    "otpMenuVisible"
-  ], (result) => {
-    // Restore No OTP inputs
-    if (result.noOtpUsername) document.getElementById("noOtpUsername").value = result.noOtpUsername;
-    if (result.noOtpMaster) document.getElementById("noOtpMaster").value = result.noOtpMaster;
-    if (result.noOtpSite) document.getElementById("noOtpSite").value = result.noOtpSite;
-
-    // Restore OTP inputs
-    if (result.username) document.getElementById("username").value = result.username;
-    if (result.masterPassword) document.getElementById("masterPassword").value = result.masterPassword;
-    if (result.siteName) document.getElementById("siteName").value = result.siteName;
-
+// change IP depend on grok ip
+    // example : let iptest = "https://f3d7-180-244-166-224.ngrok-free.app";
+    let iptest = "https://f3d7-180-244-166-224.ngrok-free.app";
     // Show correct menu based on stored state
     if (result.otpMenuVisible) {
       
@@ -23,45 +11,7 @@ window.addEventListener("load", () => {
       showNoOtpMenu();
     }
 
-    // Auto-fill site name fields with active tab's hostname if empty
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs.length === 0) return; // no active tab
-      try {
-        const url = new URL(tabs[0].url);
-
-        if (url.protocol === "http:" || url.protocol === "https:") {
-          const hostname = url.hostname;
-          chrome.storage.local.set({ siteName: hostname });
-          chrome.storage.local.set({ noOtpSite: hostname });
-          const noOtpSiteInput = document.getElementById("noOtpSite");
-          const siteNameInput = document.getElementById("siteName");
-          if (!noOtpSiteInput) {
-            noOtpSiteInput.value = hostname;
-          }
-
-          if (noOtpSiteInput) {
-            // Autofill noOtpSite if empty
-            if (noOtpSiteInput.value !=  hostname) {
-              noOtpSiteInput.value = hostname;
-            }
-            if (!noOtpSiteInput.value) {
-              noOtpSiteInput.value = hostname;
-            }
-            // Sync siteName to noOtpSite value
-            if (siteNameInput && noOtpSiteInput.value) {
-              siteNameInput.value = noOtpSiteInput.value;
-            } else if (siteNameInput && !siteNameInput.value) {
-              // If noOtpSite is empty and siteName is empty, autofill siteName with hostname
-              siteNameInput.value = hostname; 
-            }
-          }
-        }
-      } catch (e) {
-        console.error("Invalid URL in active tab", e);
-      }
-    });
   });
-});
 
 function showOtpMenu() {
   document.getElementById("noOtpMenu").style.display = "none";
@@ -128,7 +78,7 @@ function sendOTP() {
   }
 
   // SEND fetch
-  fetch("https://f3d7-180-244-166-224.ngrok-free.app/send_otp", {
+  fetch("${iptest}/send_otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email })
@@ -147,7 +97,7 @@ function sendOTP() {
 function verifyOTP() {
   const otp = document.getElementById("otpInput").value;
 
-  fetch("https://f3d7-180-244-166-224.ngrok-free.app/verify_otp", {
+  fetch("${iptest}/verify_otp", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: emailInput.value, otp: otp })
@@ -180,7 +130,7 @@ function generatePassword() {
   console.log("Email:", payload.email);
 
 
-  fetch("https://f3d7-180-244-166-224.ngrok-free.app/generate_password", {
+  fetch("${iptest}/generate_password", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -203,7 +153,7 @@ function generateNoOtpPassword() {
   console.log("Site:", payloadno.siteno);
 
 
-  fetch("https://f3d7-180-244-166-224.ngrok-free.app/generateno_password", {
+  fetch("${iptest}/generateno_password", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payloadno)
