@@ -1,10 +1,11 @@
 let otpMenuVisible = false
+let iptest = "https://f3d7-180-244-166-224.ngrok-free.app";
 window.addEventListener("load", () => {
 // change IP depend on grok ip
     // example : let iptest = "https://f3d7-180-244-166-224.ngrok-free.app";
-    let iptest = "https://f3d7-180-244-166-224.ngrok-free.app";
+    
     // Show correct menu based on stored state
-    if (result.otpMenuVisible) {
+    if (otpMenuVisible) {
       
       showOtpMenu();
     } else {
@@ -16,13 +17,11 @@ window.addEventListener("load", () => {
 function showOtpMenu() {
   document.getElementById("noOtpMenu").style.display = "none";
   document.getElementById("otpMenu").style.display = "block";
-  chrome.storage.local.set({ otpMenuVisible: true }); // only saving otpMenuVisible here
 }
 
 function showNoOtpMenu() {
   document.getElementById("noOtpMenu").style.display = "block";
   document.getElementById("otpMenu").style.display = "none";
-  chrome.storage.local.set({ otpMenuVisible: false }); // only saving otpMenuVisible here
 }
 
 // Toggle menus with buttons
@@ -78,7 +77,7 @@ function sendOTP() {
   }
 
   // SEND fetch
-  fetch("${iptest}/send_otp", {
+  fetch(`${iptest}/send_otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email })
@@ -97,7 +96,7 @@ function sendOTP() {
 function verifyOTP() {
   const otp = document.getElementById("otpInput").value;
 
-  fetch("${iptest}/verify_otp", {
+  fetch(`${iptest}/verify_otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: emailInput.value, otp: otp })
@@ -130,7 +129,7 @@ function generatePassword() {
   console.log("Email:", payload.email);
 
 
-  fetch("${iptest}/generate_password", {
+  fetch(`${iptest}/generate_password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -153,7 +152,7 @@ function generateNoOtpPassword() {
   console.log("Site:", payloadno.siteno);
 
 
-  fetch("${iptest}/generateno_password", {
+  fetch(`${iptest}/generateno_password`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payloadno)
