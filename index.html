@@ -1,103 +1,266 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Backup</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 10px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Password Generator</title>
+  <style>
+    /* Body */
+    body {
+      background-color: #12182b;
+      min-height: 100vh;
+	  min-width: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+      margin: 0;
+      font-family: system-ui, sans-serif;
+    }
 
-        input {
-            margin: 5px;
-            padding: 6px;
-            width: 250px;
-        }
+    /* Container width */
+    #noOtpMenu, #otpMenu {
+      width: 100%;
+      max-width: 400px;
+    }
 
-        button {
-            padding: 6px 10px;
-            margin: 5px;
-        }
-	
+    /* Pill buttons container */
+    .pill-container {
+      display: flex;
+      border: 1px solid #5ea1ff;
+      border-radius: 9999px; 
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
 
-        #otpStatus, #noOtpResult {
-            margin-top: 10px;
-            font-weight: bold;
-        }
+    /* Pill buttons base */
+    .pill-container button {
+      flex: 1;
+      font-weight: 600;
+      padding: 12px 0;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
 
-        #generatedPassword, #generatednoPassword {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #e63946;
-            cursor: pointer;
-            filter: blur(8px);
-            transition: filter 0.1s ease;
-            user-select: none;
-        }
-        
-        #generatedPassword:hover, #generatednoPassword:hover {
-            filter: blur(0);
-        }
-	
+    /* No OTP button */
+    .pill-no-otp {
+      background-color: #5ea1ff;
+      color: #12182b;
+      border-radius: 9999px 0 0 9999px;
+    }
 
-    </style>
+    /* OTP button */
+    .pill-otp {
+      background-color: #12182b;
+      color: #5ea1ff;
+      border-left: 1px solid #5ea1ff;
+      border-radius: 0 9999px 9999px 0;
+    }
+
+    /* Reversed in OTP menu */
+    #otpMenu .pill-no-otp {
+      background-color: #12182b;
+      color: #5ea1ff;
+      border-left: 1px solid #5ea1ff;
+      border-radius: 0 9999px 9999px 0;
+    }
+    #otpMenu .pill-otp {
+      background-color: #5ea1ff;
+      color: #12182b;
+      border-radius: 9999px 0 0 9999px;
+    }
+
+    /* Form */
+    form {
+      background-color: #1f293e;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Label */
+    label {
+      display: block;
+      color: white;
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    /* Input */
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      background-color: transparent;
+      padding: 8px 16px;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      box-sizing: border-box;
+    }
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    input:focus {
+      outline: 2px solid #5ea1ff;
+      outline-offset: 2px;
+    }
+
+    /* Buttons */
+    button.generate-btn,
+    button#btnSendOtp,
+    button#btnVerifyOtp {
+      width: 100%;
+      background-color: #5ea1ff;
+      color: white;
+      font-size: 1.125rem; 
+      padding: 12px 0;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      margin-bottom: 24px;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    button.generate-btn:hover,
+    button#btnSendOtp:hover,
+    button#btnVerifyOtp:hover {
+      background-color: #4a8be0;
+    }
+
+    /* Password display boxes */
+    #generatedPassword, #generatednoPassword {
+      margin-top: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      filter: blur(8px);
+      transition: filter 0.1s ease;
+      user-select: none;
+      background-color: #1f293e;
+      border-radius: 16px;
+      padding: 12px 16px;
+      color: white;
+      font-size: 1.125rem; /* text-lg */
+      min-height: 2.5rem;
+      box-sizing: border-box;
+    }
+
+    #generatedPassword:hover,
+    #generatednoPassword:hover {
+      filter: blur(0);
+    }
+
+    /* Text paragraph */
+    p {
+      color: white;
+      font-size: 1.125rem;
+      margin-bottom: 8px;
+    }
+
+    /* Span copied notice */
+    #copiedNotice {
+      color: #ffffff;
+    }
+
+    /* OTP status messages */
+    #otpSendStatus {
+      margin-top: 24px;
+      font-weight: bold;
+      color: rgb(62, 255, 62);
+      display: block;
+    }
+    #otpStatus {
+      margin-top: 12px;
+      font-weight: bold;
+      color: #ffffff;
+      display: block;
+    }
+
+  </style>
 </head>
 <body>
-
-    <!-- NO OTP MENU -->
-    <div id="noOtpMenu" >
-        <h3>No OTP</h3>
-        <button id="btnUseOtp">Use OTP</button>
-        <br>
-        <input type="text" id="noOtpUsername" placeholder="Username"><br>
-        <input type="password" id="noOtpMaster" placeholder="Master Password"><br>
-        <input type="text" id="noOtpSite" placeholder="Site Name"><br>
-        <button id="btnGenerateNoOtpPwd">Generate Password</button>
-        <div id="generatednoPassword"
-             title="Click to copy"
-             onmouseover="this.style.filter='none';"
-             onmouseout="this.style.filter='blur(8px)';">
-        </div>
-
-        <span id="copiedNotice" style="display:none; color:green;"> (Copied!)</span>
+  <!-- NO OTP MENU -->
+  <div id="noOtpMenu" class="container">
+    <div class="pill-container">
+      <button class="pill-no-otp">No OTP</button>
+      <button class="pill-otp" id="btnUseOtp">OTP</button>
     </div>
 
-    <!-- Menu OTP -->
-    <div id="otpMenu" style="display: none; margin-top: 20px;">
-        <h3>OTP</h3>
-        <button id="btnNoOtp">Don't Use OTP</button>
-        <br>
-        
-        <input type="text" id="emailInput" placeholder="Enter your Email">
-        <button id="btnSendOtp">Send OTP</button>
-        <span id="otpSendStatus" style="margin-left: 10px; color: green;"></span>
-        <br>
+    <form>
+      <div>
+        <label for="noOtpUsername">Username</label>
+        <input id="noOtpUsername" type="text" placeholder="Enter your username" />
+      </div>
+      <div>
+        <label for="noOtpMaster">Master Password</label>
+        <input id="noOtpMaster" type="password" placeholder="Enter your master password" />
+      </div>
+      <div>
+        <label for="noOtpSite">Site Name</label>
+        <input id="noOtpSite" type="text" placeholder="Enter the site name" />
+      </div>
+    </form>
 
-        <div id="otpContain" style="display: none;">
-            <input type="text" id="otpInput" placeholder="Enter OTP">
-            <button id="btnVerifyOtp" style="margin-left: 5px;">Verify OTP</button>
-        </div>
+    <button class="generate-btn" id="btnGenerateNoOtpPwd">Generate Password</button>
 
-        <span id="otpStatus" style="margin-left: 10px;"></span>
+    <p>Click to copy password</p>
+    <div id="generatednoPassword" title="Click to copy"
+      onmouseover="this.style.filter='none';"
+      onmouseout="this.style.filter='blur(8px)';"></div>
+    <span id="copiedNotice" style="display:none;"> (Copied!)</span>
+  </div>
 
-        <!-- Setelah OTP terverifikasi -->
-        <div id="passwordSection" style="display: none; margin-top: 15px;">
-            <input type="text" id="username" placeholder="Username"><br>
-            <input type="password" id="masterPassword" placeholder="Master Password"><br>
-            <input type="text" id="siteName" placeholder="Site Name"><br>
-            <button id="btnGeneratePwd">Generate Password</button>
-            <div id="generatedPassword"
-             title="Click to copy"
-             onmouseover="this.style.filter='none';"
-             onmouseout="this.style.filter='blur(8px)';">
-        </div>
-        <span id="copiedNotice" style="display:none; color:green;"> (Copied!)</span>
-        </div>
+  <!-- OTP MENU -->
+  <div id="otpMenu" class="container" style="display: none;">
+    <div class="pill-container">
+      <button class="pill-no-otp" id="btnNoOtp">No OTP</button>
+      <button class="pill-otp">OTP</button>
     </div>
+    <form>
+      <div contenteditable="false">
+        <label for="emailInput">Email</label>
+        <input id="emailInput" type="text" placeholder="Enter your email" style="margin-bottom: 12px;" />
+        <span id="otpSendStatus"></span>
+        <button id="btnSendOtp" style="margin-top: 12px;">Send OTP</button>
+      </div>
+      <div id="otpContain" style="display: none; margin-top: 12px;">
+        <label for="otpInput">OTP</label>
+        <input id="otpInput" type="text" placeholder="Enter your OTP" style="margin-bottom: 12px;" />
+        <button id="btnVerifyOtp">Verify OTP</button>
+        <span id="otpStatus"></span>
+      </div>
+    </form>
 
-    <script src="script.js"></script>
+    <div id="passwordSection" style="display: none;">
+      <form>
+        <div>
+          <label for="username">Username</label>
+          <input id="username" type="text" placeholder="Enter your username" style="margin-bottom: 12px;" />
+        </div>
+        <div>
+          <label for="masterPassword">Master Password</label>
+          <input id="masterPassword" type="password" placeholder="Enter your master password" style="margin-bottom: 12px;" />
+        </div>
+        <div>
+          <label for="siteName">Site Name</label>
+          <input id="siteName" type="text" placeholder="Enter the site name" style="margin-bottom: 12px;" />
+        </div>
+      </form>
+
+      <button id="btnGeneratePwd" class="generate-btn">Generate Password</button>
+
+      <p>Click to copy password</p>
+      <div id="generatedPassword"></div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
 </body>
-
-
 </html>
