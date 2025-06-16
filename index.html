@@ -296,7 +296,7 @@
       </div>
     </form>
 
-    <div id="passwordSection" style="display: none;">
+    <div id="passwordSection" style="display: block;">
       <form>
         <div>
           <label for="username">Username</label>
@@ -312,10 +312,16 @@
         </div>
       <div >
           <label for="lengthy" style="margin-bottom: 12px;">Password Length</label>
-          <input type="range" min="8" max="20" value="12" class="slider" id="lengthpass">
+          <input type="range" style="margin-bottom: 0px;" min="8" max="20" value="12" class="slider" id="lengthpass" >
+          <p style="text-align:left; margin-top: 2px; color:rgba(255, 255, 255, 0.6)">8
+          <span style="float:right;">20
+          </span></p>
+          <input id="passlengthtext" type="text" style="width: 55;" value="12" min="8" max="20"/>
       </div>
-      <div>
-        <input id="passlengthtext" type="text" style="margin-bottom: 12px;" value="12" min="8" max="20"/>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        
+        <input type="checkbox" class="rounded-checkbox" id="sc"> <label for="specialotp" >Use Special Character</label>
+        
       </div>
       </form>
 
