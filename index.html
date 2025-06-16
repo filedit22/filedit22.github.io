@@ -3,6 +3,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Password Generator</title>
+  <label style="margin-bottom: 24px";>Passwords generated with OTP via email differ from those without OTP, as the email verification adds an additional layer of security and results in a distinct password.
+</label>
   <style>
     /* Body */
     body {
@@ -12,7 +14,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 24px;
+      padding: 24px; /* 6 * 4px */
       margin: 0;
       font-family: system-ui, sans-serif;
     }
@@ -27,9 +29,9 @@
     .pill-container {
       display: flex;
       border: 1px solid #5ea1ff;
-      border-radius: 9999px; 
+      border-radius: 9999px; /* full rounded */
       overflow: hidden;
-      margin-bottom: 24px;
+      margin-bottom: 24px; /* 6 * 4px */
     }
 
     /* Pill buttons base */
@@ -43,6 +45,36 @@
       user-select: none;
       transition: background-color 0.3s ease;
     }
+    /* slider */
+    .slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 15px;
+      border-radius: 5px;  
+      background: rgba(255, 255, 255, 0.6);
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: #5ea1ff;
+    cursor: pointer;
+  }
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #04AA6D;
+  cursor: pointer;
+}
 
     /* No OTP button */
     .pill-no-otp {
@@ -119,7 +151,7 @@
       width: 100%;
       background-color: #5ea1ff;
       color: white;
-      font-size: 1.125rem; 
+      font-size: 1.125rem; /* text-lg */
       padding: 12px 0;
       border-radius: 16px;
       border: none;
@@ -182,6 +214,19 @@
       color: #ffffff;
       display: block;
     }
+    
+    .rounded-checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    appearance: none;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.rounded-checkbox:checked {
+    background: #5ea1ff;
+}
 
   </style>
 </head>
@@ -189,8 +234,8 @@
   <!-- NO OTP MENU -->
   <div id="noOtpMenu" class="container">
     <div class="pill-container">
-      <button class="pill-no-otp">No OTP</button>
-      <button class="pill-otp" id="btnUseOtp">OTP</button>
+      <button class="pill-no-otp">Without OTP</button>
+      <button class="pill-otp" id="btnUseOtp">OTP via Email</button>
     </div>
 
     <form>
@@ -206,6 +251,19 @@
         <label for="noOtpSite">Site Name</label>
         <input id="noOtpSite" type="text" placeholder="Enter the site name" />
       </div>
+      <div >
+          <label for="noOtplengthy" style="margin-bottom: 12px;">Password Length</label>
+          <input type="range" style="margin-bottom: 0px;" min="8" max="20" value="12" class="slider" id="noOtplengthpass" >
+          <p style="text-align:left; margin-top: 2px; color:rgba(255, 255, 255, 0.6)">8
+          <span style="float:right;">20
+          </span></p>
+          <input id="noOtppasslengthtext" type="text" style="width: 55;" value="12" min="8" max="20"/>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        
+        <input type="checkbox" class="rounded-checkbox" id="nosc"> <label for="special" >Use Special Character</label>
+        
+      </div>
     </form>
 
     <button class="generate-btn" id="btnGenerateNoOtpPwd">Generate Password</button>
@@ -215,13 +273,13 @@
       onmouseover="this.style.filter='none';"
       onmouseout="this.style.filter='blur(8px)';"></div>
     <span id="copiedNotice" style="display:none;"> (Copied!)</span>
-  </div>
+  </div>  
 
   <!-- OTP MENU -->
   <div id="otpMenu" class="container" style="display: none;">
     <div class="pill-container">
-      <button class="pill-no-otp" id="btnNoOtp">No OTP</button>
-      <button class="pill-otp">OTP</button>
+      <button class="pill-no-otp" id="btnNoOtp">Without OTP</button>
+      <button class="pill-otp">OTP via Email</button>
     </div>
     <form>
       <div contenteditable="false">
@@ -252,6 +310,13 @@
           <label for="siteName">Site Name</label>
           <input id="siteName" type="text" placeholder="Enter the site name" style="margin-bottom: 12px;" />
         </div>
+      <div >
+          <label for="lengthy" style="margin-bottom: 12px;">Password Length</label>
+          <input type="range" min="8" max="20" value="12" class="slider" id="lengthpass">
+      </div>
+      <div>
+        <input id="passlengthtext" type="text" style="margin-bottom: 12px;" value="12" min="8" max="20"/>
+      </div>
       </form>
 
       <button id="btnGeneratePwd" class="generate-btn">Generate Password</button>
