@@ -3,8 +3,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Password Generator</title>
-  <label style="margin-bottom: 24px";>Passwords generated with OTP via email differ from those without OTP, as the email verification adds an additional layer of security and results in a distinct password.
-</label>
   <style>
     /* Body */
     body {
@@ -234,11 +232,13 @@
   <!-- NO OTP MENU -->
   <div id="noOtpMenu" class="container">
     <div class="pill-container">
-      <button class="pill-no-otp">Without OTP</button>
-      <button class="pill-otp" id="btnUseOtp">OTP via Email</button>
+      <button class="pill-no-otp">Generate Password</button>
+      <button class="pill-otp" id="btnUseOtp">Generate via OTP</button>
     </div>
 
     <form>
+      <label style="margin-bottom: px";>Generate password without OTP via email allowing the user having faster and comfortable way to generate password
+</label>
       <div>
         <label for="noOtpUsername">Username</label>
         <input id="noOtpUsername" type="text" placeholder="Enter your username" />
@@ -277,11 +277,14 @@
 
   <!-- OTP MENU -->
   <div id="otpMenu" class="container" style="display: none;">
+    
     <div class="pill-container">
-      <button class="pill-no-otp" id="btnNoOtp">Without OTP</button>
-      <button class="pill-otp">OTP via Email</button>
+      <button class="pill-no-otp" id="btnNoOtp">Generate Password</button>
+      <button class="pill-otp">Generate via OTP</button>
     </div>
     <form>
+      <label style="margin-bottom: px";>Passwords generated with OTP via email differ from those without OTP, as the email verification adds an additional layer of security and results in a distinct password.
+</label>
       <div contenteditable="false">
         <label for="emailInput">Email</label>
         <input id="emailInput" type="text" placeholder="Enter your email" style="margin-bottom: 12px;" />
@@ -296,7 +299,7 @@
       </div>
     </form>
 
-    <div id="passwordSection" style="display: none;">
+    <div id="passwordSection" style="display: block;">
       <form>
         <div>
           <label for="username">Username</label>
