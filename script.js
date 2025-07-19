@@ -1,5 +1,5 @@
 let otpMenuVisible = false
-let iptest = "https://71688544d216.ngrok-free.app";
+let iptest = "https://81a0c1447098.ngrok-free.app";
 window.addEventListener("load", () => {
 // change IP depend on grok ip
     // example : let iptest = "https://f3d7-180-244-166-224.ngrok-free.app";
@@ -174,12 +174,7 @@ function generatePassword() {
       sc: document.getElementById("sc").checked,
       email: emailInput.value
   };
-  console.log("Username:", payload.username);
-  console.log("Master Password:", payload.master_password);
-  console.log("Site:", payload.site);
-  console.log("Email:", payload.email);
-  console.log("Length:", payload.length);
-  console.log("Checked:", payload.sc);
+
 
   if(payload.sc == false){
   fetch(`${iptest}/generate_password`, {
@@ -210,38 +205,22 @@ function generateNoOtpPassword() {
       masterno: document.getElementById("noOtpMaster").value,
       siteno: document.getElementById("noOtpSite").value,
       lengthno: document.getElementById("noOtppasslengthtext").value,
-      nosc: document.getElementById("nosc").checked,
       
   };
 
-  console.log("Username:", payloadno.usernameno);
-  console.log("Master Password:", payloadno.masterno);
-  console.log("Site:", payloadno.siteno);
-  console.log("Length:", payloadno.lengthno);
-  console.log("Checked:", payloadno.nosc);
+  const nosc = document.getElementById("nosc").checked;
+  const endpoint = nosc ? "/generateno_passwordsc" : "/generateno_password";
 
-  if (payloadno.nosc == false){
-  fetch(`${iptest}/generateno_password`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payloadno)
-            })
-      .then(res => res.json())
-      .then(datano => {
-          document.getElementById("generatednoPassword").innerText = datano.password;
-      });
-      
-    } else if (payloadno.nosc == true){
-      fetch(`${iptest}/generateno_passwordsc`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payloadno)
-            })
-      .then(res => res.json())
-      .then(datano => {
-          document.getElementById("generatednoPassword").innerText = datano.password;
-      });
-    }
+  fetch(`${iptest}${endpoint}`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(payloadno)
+})
+.then(res => res.json())
+.then(datano => {
+  document.getElementById("generatednoPassword").innerText = datano.password;
+});
+
   }
 
 document.getElementById("btnSendOtp").addEventListener("click", function(event) {
