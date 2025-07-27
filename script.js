@@ -80,8 +80,13 @@ document.getElementById("btnNoOtp").addEventListener("click", () => {
 document.getElementById("generatedPassword").addEventListener("click", () => {
   copyToClipboard(document.getElementById("generatedPassword").textContent);
 });
+document.getElementById("gen").addEventListener("click", () => {
+  copyToClipboard(document.getElementById("generatedPassword").textContent);
+});
 
-
+document.getElementById("genno").addEventListener("click", () => {
+  copyToClipboard(document.getElementById("generatednoPassword").textContent);
+});
 document.getElementById("generatednoPassword").addEventListener("click", () => {
   copyToClipboard(document.getElementById("generatednoPassword").textContent);
 });
@@ -93,6 +98,9 @@ function copyToClipboard(text) {
     const notice = document.getElementById("copiedNotice");
     notice.style.display = "inline";
     setTimeout(() => { notice.style.display = "none"; }, 1500);
+    const notice2 = document.getElementById("copiedNotice2");
+    notice2.style.display = "inline";
+    setTimeout(() => { notice2.style.display = "none"; }, 1500);
   });
 
 
