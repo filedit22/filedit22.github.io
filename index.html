@@ -311,11 +311,12 @@
 
     <button class="generate-btn" id="btnGenerateNoOtpPwd">Generate Password</button>
 
-    <p>Click to copy password</p>
+    <p id="genno" style="cursor: pointer;">Click to copy password</p>
+    <span id="copiedNotice" style="display:none;"> (Copied!)</span>
     <div id="generatednoPassword" title="Click to copy"
       onmouseover="this.style.filter='none';"
       onmouseout="this.style.filter='blur(8px)';"></div>
-    <span id="copiedNotice" style="display:none;"> (Copied!)</span>
+    
   </div>  
 
   <!-- OTP MENU -->
@@ -387,7 +388,8 @@
 
       <button id="btnGeneratePwd" class="generate-btn">Generate Password</button>
 
-      <p>Click to copy password</p>
+      	<p id="gen" style="cursor: pointer;";>Click to copy password</p>
+	<span id="copiedNotice2" style="display:none;"> (Copied!)</span>
       <div id="generatedPassword"></div>
     </div>
   </div>
