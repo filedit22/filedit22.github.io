@@ -1,5 +1,5 @@
 let otpMenuVisible = false
-let iptest = "https://1fd495015fc5.ngrok-free.app";
+let iptest = "https://ec2793e3ba57.ngrok-free.app";
 window.addEventListener("load", () => {
 // change IP depend on grok ip
     // example : let iptest = "https://f3d7-180-244-166-224.ngrok-free.app";
