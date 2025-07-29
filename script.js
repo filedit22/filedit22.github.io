@@ -23,6 +23,15 @@ window.addEventListener("unload", function () {
   });
 });
 
+window.addEventListener("load", function () {
+  document.cookie.split(";").forEach(function (cookie) {
+    document.cookie = cookie
+      .replace(/^ +/, "")
+      .replace(/=.*/, "=;expires=" + new Date(0).toUTCString() + ";path=/");
+  });
+});
+
+
 
 //slider shit
 var slider = document.getElementById("noOtplengthpass");
