@@ -24,6 +24,7 @@ window.addEventListener("unload", function () {
 });
 
 window.addEventListener("load", function () {
+    console.log("reset cookie load");
   document.cookie.split(";").forEach(function (cookie) {
     document.cookie = cookie
       .replace(/^ +/, "")
