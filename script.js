@@ -14,6 +14,16 @@ window.addEventListener("load", () => {
 
   });
 
+//reset cookie
+window.addEventListener("unload", function () {
+  document.cookie.split(";").forEach(function (cookie) {
+    document.cookie = cookie
+      .replace(/^ +/, "")
+      .replace(/=.*/, "=;expires=" + new Date(0).toUTCString() + ";path=/");
+  });
+});
+
+
 //slider shit
 var slider = document.getElementById("noOtplengthpass");
 var slider2 = document.getElementById("lengthpass");
