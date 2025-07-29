@@ -265,7 +265,7 @@
       <button class="pill-otp" id="btnUseOtp">Generate via OTP</button>
     </div>
 
-    <form autocomplete="off>
+    <form>
       <label style="font-weight:bold";>This app will generate strong, repeatable passwords using user input without storing any data, offering a secure, storage-free alternative to traditional password managers.
         
 </label>
@@ -275,7 +275,7 @@
     <div class="tooltip-text">Enter your Username <br> Example: James, Bolaku</div>
   </div></label>
         
-        <input id="noOtpUsername" type="text" placeholder="Enter your username" />
+        <input id="noOtpUsername" autocomplete="off" type="text" placeholder="Enter your username" />
           
       </div>
       <div>
@@ -290,7 +290,7 @@
     ❔
     <div class="tooltip-text">Enter the name of the site <br>Example: facebook, kaskus.com</div>
   </div></label>
-        <input id="noOtpSite" type="text" placeholder="Enter the site name" />
+        <input id="noOtpSite" autocomplete="off" type="text" placeholder="Enter the site name" />
       </div>
       <div >
           <label for="noOtplengthy" style="margin-bottom: 12px;"><div class="tooltip-container">Password Length
@@ -334,7 +334,7 @@
     ❔
     <div class="tooltip-text">Enter email that will receive OTP code <br>Example: test@gmail.com, rambo@yahoo.com</div>
   </div></label>
-        <input id="emailInput" type="text" placeholder="Enter your email" style="margin-bottom: 0x;" />
+        <input id="emailInput" type="text" autocomplete="off" placeholder="Enter your email" style="margin-bottom: 0x;" />
         <button id="btnSendOtp" style="margin-top: 12px;">Send OTP</button>
 	<span id="otpSendStatus"></span>
       </div>
@@ -343,34 +343,34 @@
     ❔
     <div class="tooltip-text">Enter the OTP code you received in your email</div>
   </div></label>
-        <input id="otpInput" type="text" placeholder="Enter your OTP" style="margin-bottom: 12px;" />
+        <input id="otpInput" type="text" autocomplete="off" placeholder="Enter your OTP" style="margin-bottom: 12px;" />
         <button id="btnVerifyOtp">Verify OTP</button>
         <span id="otpStatus"></span>
       </div>
     </form>
 
     <div id="passwordSection" style="display: none;">
-      <form autocomplete="off>
+      <form>
         <div>
           <label for="username">Username<div class="tooltip-container">
     ❔
     <div class="tooltip-text">Example: james, usersaya</div>
   </div></label>
-          <input id="username" type="text" placeholder="Enter your username" style="margin-bottom: 12px;" />
+          <input id="username" type="text" autocomplete="off" placeholder="Enter your username" style="margin-bottom: 12px;" />
         </div>
         <div>
           <label for="masterPassword">Master Password<div class="tooltip-container">
     ❔
     <div class="tooltip-text">Example: rahasia, sepakbola</div>
   </div></label>
-          <input id="masterPassword" type="password" placeholder="Enter your master password" style="margin-bottom: 12px;" />
+          <input id="masterPassword" type="password" autocomplete="off" placeholder="Enter your master password" style="margin-bottom: 12px;" />
         </div>
         <div>
           <label for="siteName">Site Name<div class="tooltip-container">
     ❔
     <div class="tooltip-text">Example: facebook, kaskus.com</div>
   </div></label>
-          <input id="siteName" type="text" placeholder="Enter the site name" style="margin-bottom: 12px;" />
+          <input id="siteName" type="text" autocomplete="off" placeholder="Enter the site name" style="margin-bottom: 12px;" />
         </div>
       <div >
           <label for="lengthy" style="margin-bottom: 12px;">Password Length</label>
